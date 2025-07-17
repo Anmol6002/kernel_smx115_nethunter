@@ -165,7 +165,7 @@ DECLARE_EVENT_CLASS(android_fs_separation_template,
 			__entry->append_ratio = arr[10];
 		}
 	),
-	TP_printk("entry_name %s, offset %llu, bytes %d, cmdline %s, pid %d, "
+	TP_printk("entry_name %s, offset %llu, bytes %lld, cmdline %s, pid %lld, "
 		"i_size %llu, ino %lu, time %llu, mtime %llu, current_time %llu, "
 		"mtime_cnt %d, is_cache %d, is_fuse %d, write_chunk %lld, "
 		"overwrite_cnt %d, append_cnt %d, overwrite_ratio %d, append_ratio %d, "
