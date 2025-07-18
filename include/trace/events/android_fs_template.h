@@ -166,17 +166,17 @@ DECLARE_EVENT_CLASS(android_fs_separation_template,
 		}
 	),
 	TP_printk("entry_name %s, offset %llu, bytes %lld, cmdline %s, pid %lld, "
-		"i_size %llu, ino %lu, time %llu, mtime %llu, current_time %llu, "
-		"mtime_cnt %d, is_cache %d, is_fuse %d, write_chunk %lld, "
-		"overwrite_cnt %d, append_cnt %d, overwrite_ratio %d, append_ratio %d, "
-		"calculate_cold %lld",
-		__get_str(pathbuf), __entry->offset, __entry->bytes, __get_str(cmdline),
-		__entry->pid, __entry->i_size, (unsigned long) __entry->ino,
-		__entry->time, __entry->mtime, __entry->current_time, __entry->mtime_cnt,
-		__entry->is_cache,  __entry->is_fuse, __entry->write_chunk,
-		__entry->overwrite_cnt, __entry->append_cnt, __entry->overwrite_ratio,
-		__entry->append_ratio, __entry->calculate_cold
-	)
+          	"i_size %llu, ino %lu, time %llu, mtime %llu, current_time %llu, "
+	        "mtime_cnt %d, is_cache %d, is_fuse %d, write_chunk %lld, "
+	        "overwrite_cnt %d, append_cnt %d, overwrite_ratio %d, append_ratio %d, "
+	        "calculate_cold %lld",
+	        __get_str(pathbuf), __entry->offset, __entry->bytes, __get_str(cmdline),
+	        __entry->pid, __entry->i_size, (unsigned long) __entry->ino,
+	        __entry->time, __entry->mtime, __entry->current_time, __entry->mtime_cnt,
+	        __entry->is_cache,  __entry->is_fuse, __entry->write_chunk,
+	        __entry->overwrite_cnt, __entry->append_cnt, __entry->overwrite_ratio,
+	        __entry->append_ratio, __entry->calculate_cold
+       	)
 
 );
 #endif
