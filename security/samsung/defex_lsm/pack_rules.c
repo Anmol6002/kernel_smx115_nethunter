@@ -439,8 +439,9 @@ int load_file_list(const char *name)
 			}
 			file_list = file_list_new;
 #ifdef DEFEX_INTEGRITY_ENABLE
+			memset(file_list[file_list_count - 1].integrity, 0, INTEGRITY_LENGTH * 2 + 1);
 			strncpy(file_list[file_list_count - 1].integrity, work_str, INTEGRITY_LENGTH * 2);
-			file_list[file_list_count - 1].integrity[INTEGRITY_LENGTH * 2] = 0;
+			file_list(file_list_count - 1].integrity[INTEGRITY_LENGTH * 2);
 #endif /* DEFEX_INTEGRITY_ENABLE */
 			SAFE_STRCOPY(file_list[file_list_count - 1].file_name, str);
 			file_list[file_list_count - 1].is_recovery = found;
