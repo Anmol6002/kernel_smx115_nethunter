@@ -1,0 +1,196 @@
+menu "Docker support"
+
+# Generally Necessary
+config DOCKER
+	bool "Core Docker support (Generally Necessary)"
+	default y
+	help
+		Enable generally necessary options required for Docker.
+		This includes namespaces, cgroups, and basic networking.
+
+	# Namespaces
+	select NAMESPACES
+	select NET_NS
+	select PID_NS
+	select IPC_NS
+	select UTS_NS
+
+	# Control Groups
+	select CGROUPS
+	select CGROUP_CPUACCT
+	select CGROUP_DEVICE
+	select CGROUP_FREEZER
+	select CGROUP_SCHED
+	select CPUSETS
+	select MEMCG
+
+	# Keys
+	select KEYS
+
+	# Basic Networking
+	select VETH
+	select BRIDGE
+	select BRIDGE_NETFILTER
+
+	# Netfilter - IPv4
+	select IP_NF_FILTER
+	select IP_NF_MANGLE
+	select IP_NF_TARGET_MASQUERADE
+	select IP_NF_RAW
+	select IP_NF_NAT
+
+	# Netfilter - IPv6
+	select IP6_NF_FILTER
+	select IP6_NF_MANGLE
+	select IP6_NF_TARGET_MASQUERADE
+	select IP6_NF_RAW
+	select IP6_NF_NAT
+
+	# Netfilter - Core
+	select NF_NAT
+	select NF_NAT_IPV4
+	select NF_NAT_NEEDED
+	select NETFILTER_XT_MATCH_ADDRTYPE
+	select NETFILTER_XT_MATCH_CONNTRACK
+	select NETFILTER_XT_MATCH_IPVS
+	select NETFILTER_XT_MARK
+
+	# POSIX Message Queues
+	select POSIX_MQUEUE
+
+# Optional Features
+config DOCKER_OPTIONAL
+	bool "Optional Docker features"
+	default y if DOCKER
+	depends on DOCKER
+	help
+		Enable optional Docker features for enhanced functionality.
+
+	# User Namespaces
+	select USER_NS
+
+	# Security
+	select SECCOMP
+	select SECCOMP_FILTER
+
+	# Additional Cgroups
+	select CGROUP_PIDS
+	select MEMCG_SWAP
+	select MEMCG_SWAP_ENABLED
+    select HUGETLBFS
+	select HUGETLB_PAGE
+	select CGROUP_HUGETLB
+	select NET_CLS_CGROUP
+	select CGROUP_NET_PRIO
+	select CGROUP_PERF
+
+	# Block I/O
+	select IOSCHED_CFQ
+	select CFQ_GROUP_IOSCHED
+	select BLK_CGROUP
+	select BLK_DEV_THROTTLING
+
+	# CPU Scheduling
+	select CFS_BANDWIDTH
+	select FAIR_GROUP_SCHED
+
+	# Network Features
+	select IP_NF_TARGET_REDIRECT
+	select IP_SCTP
+	select IP_VS
+	select IP_VS_NFCT
+	select IP_VS_PROTO_TCP
+	select IP_VS_PROTO_UDP
+	select IP_VS_RR
+
+	# Security Modules
+	select SECURITY_APPARMOR
+
+	# nftables
+	select NF_TABLES
+	select NF_TABLES_IPV4
+	select NF_TABLES_IPV6
+	select NFT_CT
+	select NFT_FIB_IPV4
+	select NFT_FIB_IPV6
+	select NFT_FIB
+	select NFT_MASQ
+	select NFT_NAT
+
+	# Filesystems
+	select EXT3_FS
+	select EXT3_FS_XATTR
+	select EXT3_FS_POSIX_ACL
+	select EXT3_FS_SECURITY
+	select EXT4_FS
+	select EXT4_FS_POSIX_ACL
+	select EXT4_FS_SECURITY
+
+# Network Drivers
+config DOCKER_NETWORK_DRIVERS
+	bool "Network drivers"
+	default y if DOCKER
+	depends on DOCKER
+	help
+		Enable all Docker network drivers (Bridge, Overlay, IPvlan, Macvlan, FTP/TFTP).
+
+	# Overlay network driver
+	select VXLAN
+	select BRIDGE_VLAN_FILTERING
+
+	# Encrypted overlay networks (optional)
+	select CRYPTO
+	select CRYPTO_AEAD
+	select CRYPTO_GCM
+	select CRYPTO_SEQIV
+	select CRYPTO_GHASH
+	select XFRM
+	select XFRM_USER
+	select XFRM_ALGO
+	select INET_ESP
+	select NETFILTER_XT_MATCH_BPF
+	select INET_XFRM_MODE_TRANSPORT
+
+	# IPvlan network driver
+	select IPVLAN
+
+	# Macvlan network driver
+	select MACVLAN
+	select DUMMY
+
+	# FTP/TFTP client in container
+	select NF_NAT_FTP
+	select NF_CONNTRACK_FTP
+	select NF_NAT_TFTP
+	select NF_CONNTRACK_TFTP
+
+# Storage Drivers
+config DOCKER_STORAGE_DRIVERS
+	bool "Storage drivers"
+	default y if DOCKER
+	depends on DOCKER
+	help
+		Enable all Docker storage drivers (Btrfs, Overlay, Device Mapper, AUFS).
+
+	# Btrfs storage driver
+	select BTRFS_FS
+	select BTRFS_FS_POSIX_ACL
+
+	# Overlay storage driver
+	select OVERLAY_FS
+	select EXT4_FS_SECURITY
+	select EXT4_FS_POSIX_ACL
+
+	# Device Mapper storage driver
+	select BLK_DEV_DM
+	select DM_THIN_PROVISIONING
+	select EXT4_FS
+	select EXT4_FS_POSIX_ACL
+	select EXT4_FS_SECURITY
+
+	# AUFS storage driver
+	select AUFS_FS
+	select EXT4_FS_POSIX_ACL
+	select EXT4_FS_SECURITY
+
+endmenu

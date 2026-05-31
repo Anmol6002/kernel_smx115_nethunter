@@ -1,0 +1,64 @@
+menu "LXC support"
+
+config LXC
+	bool "LXC support"
+	default y
+	help
+		Enable options required for Linux Containers (LXC).
+		
+		This includes essential kernel configurations for:
+		- Core namespace support (isolation)
+		- Control groups (cgroups)
+		- Network virtualization
+		- Checkpoint/Restore functionality
+		- FUSE support (for lxcfs)
+		
+		For more information, see:
+		https://linuxcontainers.org/lxc/
+
+	# Namespaces (required)
+	select NAMESPACES
+	select UTS_NS
+	select IPC_NS
+	select PID_NS
+	select USER_NS
+	select NET_NS
+
+	# Control groups (required)
+	select CGROUPS
+	select CGROUP_DEVICE
+	select CGROUP_SCHED
+	select CGROUP_CPUACCT
+	select MEMCG
+	select CPUSETS
+
+	# Network virtualization
+	select VETH
+	select MACVLAN
+	select VLAN_8021Q
+	select BRIDGE
+
+	# Netfilter (for NAT and masquerading)
+	select NETFILTER_ADVANCED
+	select NF_NAT_IPV4
+	select NF_NAT_IPV6
+	select IP_NF_TARGET_MASQUERADE
+	select IP6_NF_TARGET_MASQUERADE
+	select NETFILTER_XT_TARGET_CHECKSUM
+	select NETFILTER_XT_MATCH_COMMENT
+
+	# FUSE (for use with lxcfs)
+	select FUSE_FS
+
+	# Checkpoint/Restore
+	select CHECKPOINT_RESTORE
+	select FHANDLE
+	select EVENTFD
+	select EPOLL
+	select UNIX_DIAG
+	select INET_DIAG
+	select PACKET_DIAG
+	select NETLINK_DIAG
+
+endmenu
+

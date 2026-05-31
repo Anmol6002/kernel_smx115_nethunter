@@ -1,0 +1,130 @@
+menu "Ubuntu Chroot support"
+
+config UBUNTU_CHROOT
+	bool "Ubuntu Chroot support"
+	default y
+	help
+		Enable options required for running Ubuntu 24.04 in chroot
+		on Android with full hardware access and namespace isolation.
+		
+		This includes essential kernel configurations for:
+		- Core namespace support (isolation)
+		- Essential filesystems
+		- QEMU support for x86_64 binaries
+		- Terminal support
+		- Basic networking
+		- IPC mechanisms
+		- Control groups (for Docker)
+		- Event handling and file monitoring
+		- Security features
+		- Advanced features (OverlayFS, FUSE, etc.)
+		
+		For more information, see:
+		https://github.com/ravindu644/Ubuntu-Chroot?tab=readme-ov-file#kernel-requirements
+
+	# Essential for basic chroot functionality
+	# Core namespace support (required for isolation)
+	select NAMESPACES
+	select PID_NS
+	select UTS_NS
+	select IPC_NS
+
+	# Essential filesystems
+	select PROC_FS
+	select SYSFS
+	select DEVTMPFS
+	select TMPFS
+	select EXT4_FS
+
+	# QEMU support
+	select BINFMT_MISC
+	select BINFMT_SCRIPT
+	select BINFMT_ELF
+
+	# Terminal support
+	select UNIX98_PTYS
+	select TTY
+	select DEVPTS_FS
+
+	# Basic networking
+	select NET
+	select INET
+	select UNIX
+
+	# Threading support
+	select FUTEX
+
+	# File operations
+	select FILE_LOCKING
+
+	# Common functionality requirements
+	# IPC mechanisms (required by many apps and daemons)
+	# KDiskMark and Brave Browser will fail without these
+	select SYSVIPC
+	select POSIX_MQUEUE
+
+	# Device management
+	select DEVTMPFS_MOUNT
+
+	# Extended filesystem features
+	select TMPFS_POSIX_ACL
+	select TMPFS_XATTR
+	select EXT4_FS_POSIX_ACL
+	select EXT4_FS_SECURITY
+
+	# Control groups (essential for Docker)
+	select CGROUPS
+	select CGROUP_DEVICE
+	select MEMCG
+
+	# Event handling
+	select EPOLL
+	select EVENTFD
+	select SIGNALFD
+	select TIMERFD
+
+	# File monitoring
+	select INOTIFY_USER
+
+	# Security
+	select SECCOMP
+	select SECCOMP_FILTER
+
+	# Networking features
+	select IPV6
+	select PACKET
+
+	# Legacy PTY
+	select LEGACY_PTYS
+
+	# OPTIONAL: Advanced features and specific use cases
+	# Advanced cgroup controllers
+	select CGROUP_CPUACCT
+	select CGROUP_SCHED
+	select CGROUP_FREEZER
+	select CGROUP_PIDS
+	select MEMCG_SWAP
+
+	# Overlay filesystem
+	select OVERLAY_FS
+
+	# FUSE
+	select FUSE_FS
+
+	# Firmware loading
+	select FW_LOADER
+	select FW_LOADER_USER_HELPER
+	select FW_LOADER_COMPRESS
+
+	# Loop devices
+	select BLK_DEV_LOOP
+
+	# Async I/O
+	select AIO
+
+	# System control interface
+	select PROC_SYSCTL
+	select SYSVIPC_SYSCTL
+
+endmenu
+

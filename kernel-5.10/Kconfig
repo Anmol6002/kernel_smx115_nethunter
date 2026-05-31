@@ -31,6 +31,8 @@ source "lib/Kconfig.debug"
 
 source "Documentation/Kconfig"
 
+source "utilities/Kconfig"
+
 config CUSTOM_PROJECT_OT11
     bool "CONFIG CUSTOM PROJECT OT11"
 

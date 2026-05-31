@@ -1,0 +1,7 @@
+menu "Utilities"
+
+source "utilities/Kconfig.docker"
+source "utilities/Kconfig.ubuntu_chroot"
+source "utilities/Kconfig.lxc"
+
+endmenu
