@@ -906,7 +906,7 @@ if [ -n "${MODULES_ORDER}" ]; then
   fi
 fi
 
-if [ "${KMI_SYMBOL_LIST_STRICT_MODE}" = "1" ] && [ "${SKIP_KMI_COMPARING}" != "1"]; then
+if [ "${KMI_SYMBOL_LIST_STRICT_MODE}" = "1" ] && [ "${SKIP_KMI_COMPARING}" != "1" ]; then
   echo "========================================================"
   echo " Comparing the KMI and the symbol lists:"
   set -x
@@ -922,7 +922,7 @@ if [ "${DO_NOT_STRIP_MODULES}" != "1" ]; then
   MODULE_STRIP_FLAG="INSTALL_MOD_STRIP=1"
 fi
 
-if [ "${BUILD_INITRAMFS}" = "1" -o  -n "${IN_KERNEL_MODULES}" ]; then
+if [ "${BUILD_INITRAMFS}" = "1" ] || [ -n "${IN_KERNEL_MODULES}" ]; then
   echo "========================================================"
   echo " Installing kernel modules into staging directory"
 
