@@ -1,0 +1,5 @@
+UNPACK_TIME=1780325568
+SOURCE_IMAGE=/home/inventor/kernel_smx115_nethunter/prebuilts_smx115/AIT/INPUT_IMAGES/vendor_dlkm.img
+FILESYSTEM_TYPE=erofs
+MOUNT_METHOD=kernel
+ORIGINAL_UUID=0aa1bb37-0294-dc5d-9227-800ecf054406
